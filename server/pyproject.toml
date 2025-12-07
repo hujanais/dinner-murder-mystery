@@ -7,10 +7,22 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.124.0",
     "passlib[bcrypt]>=1.7.4",
-    "psycopg2-binary>=2.9.11",
     "pydantic>=2.12.5",
     "python-dotenv>=1.2.1",
     "python-jose[cryptography]>=3.5.0",
-    "sqlalchemy>=2.0.44",
+    "ruff>=0.14.8",
     "uvicorn[standard]>=0.38.0",
 ]
+
+[tool.ruff]
+    line-length = 88  # Set the maximum line length
+    target-version = "py311" # Specify the target Python version
+
+[tool.ruff.format]
+    docstring-code-format = true
+    docstring-code-line-length = 20
+
+[tool.ruff.lint]
+    select = ["E", "F", "W"] # Enable Pyflakes (F), pycodestyle errors (E), and warnings (W)
+    ignore = ["E501"] # Ignore the 'line too long' rule (E501)
+    extend-select = ["B"] # Extend with additional checks for Python errors and gotchas

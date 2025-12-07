@@ -2,30 +2,25 @@
 API routes for authentication and JWT token management.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from fastapi import APIRouter, HTTPException, status
 
 from ..models.request import LoginRequest
 from ..models.response import ResponseBody
-from ..db import get_db
-from ..services import auth_service
 
 router = APIRouter()
 
 
 @router.post("/login", response_model=ResponseBody)
 async def login(
-    request: LoginRequest,
-    db: Session = Depends(get_db)
+    request: LoginRequest
 ):
     """
     Login endpoint for user authentication.
     Generates and returns a JWT token upon successful authentication.
-    
+
     Args:
         request: LoginRequest containing username and password
-        db: Database session
-        
+
     Returns:
         ResponseBody with success status, message, and JWT token in data
     """
@@ -38,17 +33,15 @@ async def login(
 
 @router.post("/token", response_model=ResponseBody)
 async def generate_token(
-    request: LoginRequest,
-    db: Session = Depends(get_db)
+    request: LoginRequest
 ):
     """
     Token generation endpoint.
     Alternative endpoint for generating JWT tokens.
-    
+
     Args:
         request: LoginRequest containing username and password
-        db: Database session
-        
+
     Returns:
         ResponseBody with success status, message, and JWT token in data
     """

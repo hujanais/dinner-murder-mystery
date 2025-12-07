@@ -36,9 +36,8 @@ Platform:
 Responsive web-based application accessible via major desktop and mobile browsers.
 
 # Server-side Requirements
-Server framework: FastAPI, SQLAlchemy
+Server framework: FastAPI
 Model: Pydantic
-Database: Postgres
 
 ## Core Game Components
     Detective (Player): A single detective character.
@@ -57,7 +56,7 @@ Database: Postgres
     - All RestAPI calls shall have a dedicated RequestBody and ResponseBody
     - For ResponseBody, it could be generic and have {success: True or False, message: str, url: str}
 
-### Database and Schemas
+### Data Models
 Guest (BaseModel)
     Name: Name of the guest.
     Age: Age of the guest.
@@ -68,9 +67,9 @@ Guest (BaseModel)
     Detective: Inherits from Guest with IsCriminal = False.
 
 Demeanor
-    name = Column(String, nullable=False, unique=True, index=True)  # e.g., "BRASH", "SHY", "TALKATIVE"
-    display_name = Column(String, nullable=False)  # e.g., "Brash", "Shy", "Talkative"
-    description = Column(Text, nullable=False)  # Detailed description of the demeanor
+    name: String identifier (e.g., "BRASH", "SHY", "TALKATIVE")
+    display_name: String display name (e.g., "Brash", "Shy", "Talkative")
+    description: Text description of the demeanor
 
 EntityBase (BaseModel)
     Title: Title of the entity (e.g., Room, Clue).
@@ -92,7 +91,6 @@ Implementation: The team will manage WebSocket connections using FastAPI, facili
 ### Unit Testing: Not required at this phase, but integration testing will be considered.
 
 ### Folder structure
-db: Contains database related utitlies and db models
 models: Contains pydantic models.
 routes: Contains routes related.
 services: Contains the business logic.

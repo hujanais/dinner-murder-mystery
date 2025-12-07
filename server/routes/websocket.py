@@ -2,10 +2,8 @@
 WebSocket routes for real-time communication.
 """
 
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
-from typing import List
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
-from ..services import websocket_service
 
 router = APIRouter()
 
@@ -15,7 +13,7 @@ async def websocket_endpoint(websocket: WebSocket):
     """
     WebSocket endpoint for real-time updates.
     Handles guest responses, interjections, and other dynamic interactions.
-    
+
     Args:
         websocket: WebSocket connection
     """
@@ -40,7 +38,7 @@ async def websocket_endpoint(websocket: WebSocket):
 async def websocket_endpoint_with_id(websocket: WebSocket, client_id: str):
     """
     WebSocket endpoint with client ID for managing multiple connections.
-    
+
     Args:
         websocket: WebSocket connection
         client_id: Unique identifier for the client connection
