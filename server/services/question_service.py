@@ -2,7 +2,6 @@
 Business logic for question/interrogation functionality.
 """
 
-
 from ..models.request import QuestionRequest
 
 
@@ -17,10 +16,7 @@ class QuestionService:
         """
         pass
 
-    def process_question(
-        self,
-        request: QuestionRequest
-    ) -> dict:
+    def process_question(self, request: QuestionRequest) -> dict:
         """
         Process a question asked to a guest.
 
@@ -42,16 +38,9 @@ class QuestionService:
 
         # TODO: Implement guest lookup
         # For now, return placeholder response
-        return {
-            "response": "Guest response not yet implemented",
-            "interjections": []
-        }
+        return {"response": "Guest response not yet implemented", "interjections": []}
 
-    def get_guest_response(
-        self,
-        guest_id: int,
-        question: str
-    ) -> str:
+    def get_guest_response(self, guest_id: int, question: str) -> str:
         """
         Get a guest's response to a specific question.
 
@@ -67,11 +56,7 @@ class QuestionService:
         # to generate an appropriate response
         pass
 
-    def check_for_interjections(
-        self,
-        guest_id: int,
-        question: str
-    ) -> list:
+    def check_for_interjections(self, guest_id: int, question: str) -> list:
         """
         Check if other guests should interject based on the question.
 
@@ -89,9 +74,7 @@ class QuestionService:
 
 
 # Convenience functions for easier usage
-def process_question(
-    request: QuestionRequest
-) -> dict:
+def process_question(request: QuestionRequest) -> dict:
     """
     Process a question asked to a guest.
 
@@ -108,10 +91,7 @@ def process_question(
     return service.process_question(request)
 
 
-def get_guest_response(
-    guest_id: int,
-    question: str
-) -> str:
+def get_guest_response(guest_id: int, question: str) -> str:
     """
     Get a guest's response to a specific question.
 
@@ -126,10 +106,7 @@ def get_guest_response(
     return service.get_guest_response(guest_id, question)
 
 
-def check_for_interjections(
-    guest_id: int,
-    question: str
-) -> list:
+def check_for_interjections(guest_id: int, question: str) -> list:
     """
     Check if other guests should interject based on the question.
 
@@ -142,4 +119,3 @@ def check_for_interjections(
     """
     service = QuestionService()
     return service.check_for_interjections(guest_id, question)
-

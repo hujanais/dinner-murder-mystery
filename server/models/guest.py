@@ -2,29 +2,63 @@
 Pydantic models for Guest and Detective entities.
 """
 
-from ast import Dict
+from typing import Dict
+from agno.agent import Agent
 from pydantic import BaseModel, Field
 from typing import Optional
 from enum import Enum
 
-from server.models.conversation import ConversationItem
+from models.conversation import ConversationItem
+
 
 class Gender(str, Enum):
     """Gender types."""
+
     MALE = "Male"
     FEMALE = "Female"
 
 
-class Guest(BaseModel):
+class Deameanor:
+    """Describes the demeanor"""
+
+    name: str
+    description: str
+
+
+class Guest:
     """
     Pydantic model for Guest character.
     """
-    name: str = Field(..., description="Name of the guest")
-    age: int = Field(..., gt=0, description="Age of the guest")
-    demeanor: Dict[str, str] = Field(..., description="Guest's demeanor type")
-    backstory: str = Field(..., description="Knowledge base including potential motives")
-    is_criminal: bool = Field(default=False, description="Boolean flag indicating if this guest is the criminal")
-    gender: Gender = Field(..., description="Gender of the guest")
+
+    name: str
+    age: int
+    demeanor: Deameanor
+    description: str
+    is_criminal: bool
+    gender: Gender
+    url: str
+    agent: Optional[Agent] = None
+
+    def __init__(
+        self,
+        name: str,
+        age: int,
+        gender: Gender,
+        description: str,
+        is_criminal: bool,
+        url: str,
+        agent: Agent,
+    ):
+        self.name = name
+        self.age = age
+        self.gender = gender
+        self.description = description
+        self.is_criminal = is_criminal
+        self.url = url
+        self.agent = agent
+
+    def register_agent(self, agent: Agent) -> None:
+        self.agent = agent
 
     def respond(self, question: str) -> str:
         """
@@ -40,16 +74,13 @@ class Guest(BaseModel):
         # interject to the question based on the guest's demeanor and backstory
         pass
 
-    class Config:
-        from_attributes = True
-        use_enum_values = True
-
 
 class Detective(BaseModel):
     """
     Pydantic model for Detective (Player).
     Inherits from Guest with is_criminal = False.
     """
+
     name: str = Field(..., description="Name of the detective")
     age: int = Field(..., gt=0, description="Age of the detective")
     backstory: str = Field(..., description="Detective's background")
