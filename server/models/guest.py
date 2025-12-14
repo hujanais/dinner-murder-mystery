@@ -1,14 +1,21 @@
 """
 Pydantic models for Guest and Detective entities.
 """
+import os
+from models.conversation import ConversationItem
 
-from typing import Dict
 from agno.agent import Agent
+from agno.models.openai import OpenAIChat
 from pydantic import BaseModel, Field
-from typing import Optional
 from enum import Enum
 
-from models.conversation import ConversationItem
+from dotenv import load_dotenv
+load_dotenv()
+
+load_dotenv()
+API_KEY = os.getenv("OPENAI_API_KEY")
+openai_model = OpenAIChat(id="gpt-4o-mini", api_key=os.getenv("OPENAI_API_KEY"))
+
 
 
 class Gender(str, Enum):
@@ -21,9 +28,29 @@ class Gender(str, Enum):
 class Deameanor:
     """Describes the demeanor"""
 
-    name: str
-    description: str
+    def __init__(self, name: str, description: str):
+        self.name = name
+        self.description = description
 
+
+def create_agent(name: str, gender: Gender, age: int, demeanor: Deameanor, knowledge_base: str) -> Agent:
+    """
+    Create an agent.
+    """
+    return Agent(
+        name=name,
+        model=openai_model,
+        reasoning=True,
+        description=f"""
+         When you are asked a question, you should respond based on your backstory and knowledge base only.
+         You should not reveal any information that is not in your knowledge base.  You are to role-play the character
+         to make it as realistic as possible.
+         Be playful and engaging in your responses but keep it realistic.
+         You are role playing as {name} in a murder mystery game.  You are a {age} year old {gender}.
+         Your demeanor is: {demeanor.description}.
+         Your knowledge base is: {knowledge_base}.
+        """,
+    )
 
 class Guest:
     """
@@ -37,7 +64,6 @@ class Guest:
     is_criminal: bool
     gender: Gender
     url: str
-    agent: Optional[Agent] = None
 
     def __init__(
         self,
@@ -47,7 +73,7 @@ class Guest:
         description: str,
         is_criminal: bool,
         url: str,
-        agent: Agent,
+        demeanor: Deameanor,
     ):
         self.name = name
         self.age = age
@@ -55,10 +81,8 @@ class Guest:
         self.description = description
         self.is_criminal = is_criminal
         self.url = url
-        self.agent = agent
-
-    def register_agent(self, agent: Agent) -> None:
-        self.agent = agent
+        self.demeanor = demeanor
+        self.agent = create_agent(name, gender, age, demeanor, description)
 
     def respond(self, question: str) -> str:
         """

@@ -17,4 +17,3 @@ api_router.include_router(auth.router, tags=["authentication"])
 api_router.include_router(websocket.router, tags=["websocket"])
 
 __all__ = ["api_router"]
-

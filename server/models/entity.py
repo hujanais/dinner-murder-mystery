@@ -14,9 +14,7 @@ class EntityBase(BaseModel):
     id: Optional[int] = None
     title: str = Field(..., description="Title of the entity")
     description: str = Field(..., description="Description of the entity")
-    url: Optional[str] = Field(
-        None, description="URL to an external image or HTML for display"
-    )
+    url: Optional[str] = Field(None, description="URL to an external image or HTML for display")
 
     class Config:
         from_attributes = True
@@ -37,9 +35,7 @@ class Clue(EntityBase):
     Extends EntityBase.
     """
 
-    room_id: Optional[int] = Field(
-        None, description="ID of the room where this clue can be found"
-    )
+    room_id: Optional[int] = Field(None, description="ID of the room where this clue can be found")
 
 
 class Solution(EntityBase):

@@ -11,9 +11,7 @@ router = APIRouter()
 
 
 @router.post("/question", response_model=ResponseBody)
-async def ask_question(
-    request: QuestionRequest
-):
+async def ask_question(request: QuestionRequest):
     """
     POST /api/question
     Ask a question to a guest.
@@ -27,8 +25,4 @@ async def ask_question(
     """
     # TODO: Implement question handling logic
     # This should trigger a WebSocket message with the guest's answer
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="Question endpoint not yet implemented"
-    )
-
+    raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="Question endpoint not yet implemented")

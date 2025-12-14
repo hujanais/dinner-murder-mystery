@@ -5,9 +5,7 @@ Business logic for search functionality.
 from typing import Optional
 
 
-def search_location(
-    location: str
-) -> Optional[dict]:
+def search_location(location: str) -> Optional[dict]:
     """
     Search a location for clues with probabilistic discovery.
 
@@ -29,9 +27,7 @@ def search_location(
     return None
 
 
-def get_clues_in_location(
-    room_id: int
-) -> list:
+def get_clues_in_location(room_id: int) -> list:
     """
     Get all clues that can be found in a specific room.
 
@@ -45,10 +41,7 @@ def get_clues_in_location(
     return []
 
 
-def calculate_discovery_probability(
-    room_id: int,
-    clues_found_count: int
-) -> float:
+def calculate_discovery_probability(room_id: int, clues_found_count: int) -> float:
     """
     Calculate the probability of finding a clue in a location.
 
@@ -66,4 +59,3 @@ def calculate_discovery_probability(
     # - Player progress
     # - Other game state factors
     return 0.5  # Placeholder: 50% chance
-

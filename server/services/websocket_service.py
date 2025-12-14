@@ -83,11 +83,7 @@ class ConnectionManager:
             response: The guest's response text
         """
         # TODO: Implement guest response sending
-        message = {
-            "type": "guest_response",
-            "guest_id": guest_id,
-            "response": response
-        }
+        message = {"type": "guest_response", "guest_id": guest_id, "response": response}
         await self.send_personal_message(message, client_id)
 
     async def send_interjection(self, client_id: str, interjecting_guest_id: int, message: str):
@@ -100,14 +96,9 @@ class ConnectionManager:
             message: The interjection message
         """
         # TODO: Implement interjection sending
-        message_data = {
-            "type": "interjection",
-            "guest_id": interjecting_guest_id,
-            "message": message
-        }
+        message_data = {"type": "interjection", "guest_id": interjecting_guest_id, "message": message}
         await self.send_personal_message(message_data, client_id)
 
 
 # Global connection manager instance
 manager = ConnectionManager()
-

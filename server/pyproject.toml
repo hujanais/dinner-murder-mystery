@@ -7,6 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "agno>=2.3.8",
     "fastapi>=0.124.0",
+    "openai>=2.11.0",
     "passlib[bcrypt]>=1.7.4",
     "pydantic>=2.12.5",
     "python-dotenv>=1.2.1",
@@ -16,7 +17,7 @@ dependencies = [
 ]
 
 [tool.ruff]
-    line-length = 88  # Set the maximum line length
+    line-length = 160  # Set the maximum line length
     target-version = "py311" # Specify the target Python version
 
 [tool.ruff.format]

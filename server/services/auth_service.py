@@ -82,10 +82,7 @@ def verify_token(token: str) -> Optional[dict]:
         return None
 
 
-def authenticate_user(
-    username: str,
-    password: str
-) -> Optional[dict]:
+def authenticate_user(username: str, password: str) -> Optional[dict]:
     """
     Authenticate a user with username and password.
 
@@ -102,4 +99,3 @@ def authenticate_user(
     # 2. Verify the password
     # 3. Return user information if valid
     return None
-

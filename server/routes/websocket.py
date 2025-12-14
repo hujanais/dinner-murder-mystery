@@ -53,4 +53,3 @@ async def websocket_endpoint_with_id(websocket: WebSocket, client_id: str):
     except WebSocketDisconnect:
         # TODO: Handle disconnection cleanup
         pass
-

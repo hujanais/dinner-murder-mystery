@@ -1,13 +1,17 @@
 from pydantic import BaseModel
 
+
 class ConversationItem(BaseModel):
     """Description of the conversation item."""
+
     name: str
     content: str
     url: str
 
-class ConversationHistory():
+
+class ConversationHistory:
     """Contains the list of all conversation items."""
+
     items: list[ConversationItem]
 
     def add_item(self, item: ConversationItem):
