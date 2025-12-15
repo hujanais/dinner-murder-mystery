@@ -20,37 +20,98 @@ class Story:
         """
         Load a story from a file.
         """
-        self.title = "Title of the story"
-        self.description = "Description of the story"
-        self.url = "URL of the story"
-        self.story = "Story of the story"
+        # In this version we seed the story inline; story_path is unused for now.
+        self.title = "Death of the Bitcoin Baron"
+        self.description = (
+            "Vincent Drake, self-made crypto tycoon, collapsed during a private dinner at his estate. "
+            "You must interrogate the five guests to uncover who sabotaged the evening—and why."
+        )
+        self.url = "death-of-the-bitcoin-baron"
+        self.story = (
+            "A stormy night traps five guests with Vincent Drake at his mountain estate. Each guest has a motive—"
+            "from financial betrayal to exposed secrets. Moments after a toast, Vincent collapses. "
+            "Search rooms, extract motives, and determine who turned dinner into a crime scene."
+        )
         self.solution = Solution(
-            title="Solution of the story",
-            description="Description of the solution",
-            url="URL of the solution",
+            title="Helena Voss poisoned Vincent's wine",
+            description=(
+                "Helena Voss slipped a slow-acting poison into Vincent's wine before the toast. "
+                "Motive: to silence him before he exposed her past crypto fraud to investors, "
+                "which would have ruined her comeback. Clue trail: poisoned wine glass near Helena, "
+                "her criminal record printout, and her insistence on pouring Vincent's drink."
+            ),
+            url="solution-helena-voss",
         )
         self.clues = [
             Clue(
-                title="Clue 1",
-                description="Description of the clue 1",
-                url="URL of the clue 1",
+                title="Spiked Merlot Glass",
+                description=(
+                    "Vincent's wine glass contained traces of a bitter, slow-acting toxin. "
+                    "Helena insisted on pouring his drink during the toast."
+                ),
+                url="clue-spiked-merlot",
             ),
             Clue(
-                title="Clue 2",
-                description="Description of the clue 2",
-                url="URL of the clue 2",
+                title="Termination Email Draft",
+                description=(
+                    "A draft on Vincent's laptop shows he was replacing Olivia as counsel tonight. "
+                    'Subject: "Transition of Legal Representation."'
+                ),
+                url="clue-termination-email",
+            ),
+            Clue(
+                title="Stolen Algorithm Notes",
+                description=(
+                    "Marcus's notebook accuses Vincent of stealing his mining efficiency algorithm. "
+                    "Dated two weeks before Marcus was forced out."
+                ),
+                url="clue-algorithm-notes",
+            ),
+            Clue(
+                title="Trust Fund Denial",
+                description=(
+                    "Evelyn's inbox shows Vincent refused to release funds for her startup days ago. "
+                    "A draft reply from Evelyn ends mid-sentence, as if interrupted."
+                ),
+                url="clue-trust-fund-denial",
+            ),
+            Clue(
+                title="Missing Hardware Audit",
+                description=(
+                    "Audit from the server room lists missing GPUs. Vincent blamed Sanjay. "
+                    "An unsigned note reads: \"Find the pallets before the board hears.\""
+                ),
+                url="clue-missing-hardware-audit",
+            ),
+            Clue(
+                title="Criminal Record Printout",
+                description=(
+                    "A printed article in the study details Helena's prior crypto fraud conviction. "
+                    "Fresh ink; likely printed just before dinner."
+                ),
+                url="clue-criminal-record",
             ),
         ]
         self.rooms = [
             Room(
-                title="Room 1",
-                description="Description of the room 1",
-                url="URL of the room 1",
+                title="Dining Hall",
+                description="Scene of the toast and collapse; Vincent's glass and seating chart remain.",
+                url="room-dining-hall",
             ),
             Room(
-                title="Room 2",
-                description="Description of the room 2",
-                url="URL of the room 2",
+                title="Server Room",
+                description="Racks of mining hardware; audit logs and missing GPU notes are here.",
+                url="room-server-room",
+            ),
+            Room(
+                title="Study",
+                description="Vincent's private office; contains drafts, contracts, and the printed record.",
+                url="room-study",
+            ),
+            Room(
+                title="Conservatory",
+                description="A quiet glass room; guests claim to have waited here during the storm.",
+                url="room-conservatory",
             ),
         ]
         self.guests = [

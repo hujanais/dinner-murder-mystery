@@ -10,7 +10,6 @@ from pydantic import BaseModel, Field
 from enum import Enum
 
 from dotenv import load_dotenv
-load_dotenv()
 
 load_dotenv()
 API_KEY = os.getenv("OPENAI_API_KEY")
@@ -33,22 +32,29 @@ class Deameanor:
         self.description = description
 
 
-def create_agent(name: str, gender: Gender, age: int, demeanor: Deameanor, knowledge_base: str) -> Agent:
+def create_agent(
+    name: str,
+    gender: Gender,
+    age: int,
+    demeanor: Deameanor,
+    knowledge_base: str,
+    is_criminal: bool,
+) -> Agent:
     """
-    Create an agent.
+    Create an agent with guardrails for the mystery.
     """
     return Agent(
         name=name,
         model=openai_model,
         reasoning=True,
         description=f"""
-         When you are asked a question, you should respond based on your backstory and knowledge base only.
-         You should not reveal any information that is not in your knowledge base.  You are to role-play the character
-         to make it as realistic as possible.
-         Be playful and engaging in your responses but keep it realistic.
-         You are role playing as {name} in a murder mystery game.  You are a {age} year old {gender}.
-         Your demeanor is: {demeanor.description}.
-         Your knowledge base is: {knowledge_base}.
+        You role-play as {name}, a {age}-year-old {gender} in a murder mystery dinner.
+        Stay strictly in character. Use your demeanor: {demeanor.description}.
+        Base every answer ONLY on your knowledge base: {knowledge_base}.
+        Never reveal information you do not know.
+        If you are the killer ({'yes' if is_criminal else 'no'}), never confess; deflect subtly and protect yourself.
+        If you are not the killer, share only what you know first-hand; avoid wild speculation.
+        Keep responses concise, human, and situational.
         """,
     )
 
@@ -82,14 +88,13 @@ class Guest:
         self.is_criminal = is_criminal
         self.url = url
         self.demeanor = demeanor
-        self.agent = create_agent(name, gender, age, demeanor, description)
+        self.agent = create_agent(name, gender, age, demeanor, description, is_criminal)
 
     def respond(self, question: str) -> str:
         """
-        Respond to a question.
+        Respond to a question based on the guest's demeanor and backstory.
         """
-        # respond to the question based on the guest's demeanor and backstory
-        pass
+        return self.agent.print_response(question)
 
     def interject(self, conversation: list[ConversationItem]) -> str:
         """
