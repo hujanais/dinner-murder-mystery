@@ -100,8 +100,17 @@ class Guest:
         """
         Interject to a question that was directed to another guest.
         """
-        # interject to the question based on the guest's demeanor and backstory
-        pass
+        if not conversation:
+            return ""
+        last = conversation[-1]
+        prompt = (
+            f"Another guest just said:\n"
+            f"{last.name}: {last.content}\n\n"
+            "You are overhearing this. Only respond if you have a correction, contradiction, "
+            "or sharp comment that fits your backstory and demeanor. If you have nothing "
+            "meaningful to add, respond with an empty string."
+        )
+        return self.agent.print_response(prompt)
 
 
 class Detective(BaseModel):

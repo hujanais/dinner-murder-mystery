@@ -15,6 +15,8 @@ class Story:
         self.clues: list[Clue]
         self.rooms: list[Room]
         self.guests: list[Guest]
+        # Maps room.url -> list of clue.url that can be discovered there.
+        self.room_clues: dict[str, list[str]] = {}
 
     def load_story(self, story_path: str):
         """
@@ -114,6 +116,13 @@ class Story:
                 url="room-conservatory",
             ),
         ]
+        # Map rooms to the clues that can be discovered there.
+        self.room_clues = {
+            "room-dining-hall": ["clue-spiked-merlot"],
+            "room-server-room": ["clue-missing-hardware-audit"],
+            "room-study": ["clue-termination-email", "clue-criminal-record"],
+            "room-conservatory": ["clue-trust-fund-denial", "clue-algorithm-notes"],
+        }
         self.guests = [
             Guest(
                 name="Olivia Drake",

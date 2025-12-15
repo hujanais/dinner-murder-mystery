@@ -1,15 +1,17 @@
 """
-Entrypoint for main service
+Entrypoint for main service and game orchestration.
 """
 
 from models.story import Story
+from models.game_state import GameState
 
 
 class GameEngine:
     """The game engine."""
 
-    story: Story = Story()
-    story.load_story("story.json")
-
     def __init__(self):
-        pass
+        self.story: Story = Story()
+        # For now, we ignore the story_path argument and seed inline data.
+        self.story.load_story("story.json")
+        self.state: GameState = GameState()
+
